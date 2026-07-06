@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: tolet-backend
+    env: node
+    plan: starter
+    buildCommand: "npm install"
+    startCommand: "node src/server.js"
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        sync: false   # set securely in Render dashboard
+      - key: MONGO_URI
+        sync: false   # your MongoDB Atlas or Render Mongo connection string
+      - key: R2_ENDPOINT
+        sync: false   # Cloudflare R2 endpoint
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+      - key: R2_BUCKET_NAME
+        sync: false
