@@ -36,7 +36,7 @@
     <!-- ✅ Logo placement -->
     <div class="logo">
       <a href="/">
-        <img src="/logo.png" alt="Naijahomes Logo" />
+        <img src="/naijahomes.png" alt="Naijahomes Logo" />
       </a>
     </div>
 
