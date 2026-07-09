@@ -2,6 +2,7 @@
 const Property = require("../models/Property");
 const { uploadFile } = require("../utils/cloudflare");
 
+// ✅ Upload property images
 exports.uploadPropertyImages = async (req, res, next) => {
   try {
     if (!req.files || req.files.length === 0) {
@@ -18,25 +19,29 @@ exports.uploadPropertyImages = async (req, res, next) => {
         )
       )
     );
-    
-exports.markAsRented = async (req, res, next) => {
-  try {
-    const property = await r2Service.markAsRented(req.params.id);
-    res.json({ success: true, property });
+
+    const urls = uploadResults.map(
+      (result) => `${process.env.CLOUDFLARE_R2_PUBLIC_URL}/${result.key}`
+    );
+
+    const property = await Property.create({
+      user: req.user.id,
+      title: req.body.title,
+      phone: req.body.phone,
+      location: req.body.location,
+      description: req.body.description,
+      type: req.body.type,
+      images: urls,
+    });
+
+    res.status(201).json(property);
   } catch (err) {
     next(err);
   }
 };
 
-exports.markAsSold = async (req, res, next) => {
-  try {
-    const property = await r2Service.markAsSold(req.params.id);
-    res.json({ success: true, property });
-  } catch (err) {
-    next(err);
-  }
-};
-    exports.updateProperty = async (req, res, next) => {
+// ✅ Update property
+exports.updateProperty = async (req, res, next) => {
   try {
     const property = await Property.findByIdAndUpdate(
       req.params.id,
@@ -50,22 +55,29 @@ exports.markAsSold = async (req, res, next) => {
   }
 };
 
-    const urls = uploadResults.map(
-      (result) => `${process.env.CLOUDFLARE_R2_PUBLIC_URL}/${result.key}`
+// ✅ Mark as rented
+exports.markAsRented = async (req, res, next) => {
+  try {
+    const property = await Property.findByIdAndUpdate(
+      req.params.id,
+      { status: "rented" },
+      { new: true }
     );
+    res.json({ success: true, property });
+  } catch (err) {
+    next(err);
+  }
+};
 
-    // ✅ Save property with image URLs
-    const property = await Property.create({
-      user: req.user.id,
-      title: req.body.title,
-      phone: req.body.phone,
-      location: req.body.location,
-      description: req.body.description,
-      type: req.body.type,
-      images: urls,
-    });
-
-    res.status(201).json(property);
+// ✅ Mark as sold
+exports.markAsSold = async (req, res, next) => {
+  try {
+    const property = await Property.findByIdAndUpdate(
+      req.params.id,
+      { status: "sold" },
+      { new: true }
+    );
+    res.json({ success: true, property });
   } catch (err) {
     next(err);
   }
