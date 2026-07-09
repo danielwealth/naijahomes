@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Naijahomes | Find Your Next Property</title>
   <meta name="description" content="Discover rental and sale properties with Naijahomes. Browse listings, connect with landlords, and find your dream home easily." />
-  <meta name="keywords" content="real estate, property rental, houses for sale, apartments, ToLet Nigeria" />
+  <meta name="keywords" content="real estate, property rental, houses for sale, apartments, Naijahomes Nigeria" />
   <meta name="author" content="Naijahomes Team" />
 
   <!-- Open Graph (Facebook, LinkedIn) -->
-  <meta property="og:title" content="ToLet | Find Your Next Property" />
+  <meta property="og:title" content="Naijahomes | Find Your Next Property" />
   <meta property="og:description" content="Discover rental and sale properties with Naijahomes. Browse listings, connect with landlords, and find your dream home easily." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mynaijahomes.com" />
@@ -18,7 +18,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="ToLet | Find Your Next Property" />
+  <meta name="twitter:title" content="Naijahomes | Find Your Next Property" />
   <meta name="twitter:description" content="Discover rental and sale properties with Naijahomes. Browse listings, connect with landlords, and find your dream home easily." />
   <meta name="twitter:image" content="https://mynaijahomes.com/preview.jpg" />
 
@@ -33,7 +33,14 @@
 </head>
 <body>
   <header>
-    <h1>Welcome to ToLet</h1>
+    <!-- ✅ Logo placement -->
+    <div class="logo">
+      <a href="/">
+        <img src="/logo.png" alt="Naijahomes Logo" />
+      </a>
+    </div>
+
+    <h1>Welcome to Naijahomes</h1>
     <nav>
       <ul>
         <li><a href="/properties">Properties</a></li>
