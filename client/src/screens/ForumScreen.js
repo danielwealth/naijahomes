@@ -1,9 +1,9 @@
 // src/screens/ForumScreen.js
 import React, { useState } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
-import Header from "../components/common/Header";
-import Footer from "../components/common/Footer";
-import Loader from "../components/common/Loader";
+import Header from "../components/Common/Header";
+import Footer from "../components/Common/Footer";
+import Loader from "../components/Common/Loader";
 import ForumList from "../components/Forum/ForumList";
 import NewPostForm from "../components/Forum/NewPostForm";
 
