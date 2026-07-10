@@ -1,7 +1,6 @@
 // src/components/Property/UploadForm.js
 import React from "react";
-import { View, TextInput, Button, Text, StyleSheet } from "react-native";
-import { Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
@@ -40,65 +39,69 @@ export default function UploadForm({ token, onSuccess }) {
         }
       }}
     >
-      {({ handleChange, handleSubmit, values, errors, isSubmitting }) => (
-        <View style={styles.container}>
-          <TextInput
-            style={styles.input}
-            placeholder="Title"
-            value={values.title}
-            onChangeText={handleChange("title")}
-          />
-          {errors.title && <Text style={styles.error}>{errors.title}</Text>}
+      {({ isSubmitting, errors }) => (
+        <Form style={styles.container}>
+          <div style={styles.field}>
+            <Field type="text" name="title" placeholder="Title" style={styles.input} />
+            <ErrorMessage name="title" component="div" style={styles.error} />
+          </div>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Location"
-            value={values.location}
-            onChangeText={handleChange("location")}
-          />
-          {errors.location && <Text style={styles.error}>{errors.location}</Text>}
+          <div style={styles.field}>
+            <Field type="text" name="location" placeholder="Location" style={styles.input} />
+            <ErrorMessage name="location" component="div" style={styles.error} />
+          </div>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Phone Number"
-            value={values.phone}
-            onChangeText={handleChange("phone")}
-            keyboardType="phone-pad"
-          />
-          {errors.phone && <Text style={styles.error}>{errors.phone}</Text>}
+          <div style={styles.field}>
+            <Field type="text" name="phone" placeholder="Phone Number" style={styles.input} />
+            <ErrorMessage name="phone" component="div" style={styles.error} />
+          </div>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Description"
-            value={values.description}
-            onChangeText={handleChange("description")}
-            multiline
-          />
-          {errors.description && <Text style={styles.error}>{errors.description}</Text>}
+          <div style={styles.field}>
+            <Field
+              as="textarea"
+              name="description"
+              placeholder="Description"
+              style={styles.input}
+            />
+            <ErrorMessage name="description" component="div" style={styles.error} />
+          </div>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Type (rent/buy)"
-            value={values.type}
-            onChangeText={handleChange("type")}
-          />
-          {errors.type && <Text style={styles.error}>{errors.type}</Text>}
+          <div style={styles.field}>
+            <Field as="select" name="type" style={styles.input}>
+              <option value="rent">Rent</option>
+              <option value="buy">Buy</option>
+            </Field>
+            <ErrorMessage name="type" component="div" style={styles.error} />
+          </div>
 
-          {errors.api && <Text style={styles.error}>{errors.api}</Text>}
+          {errors.api && <div style={styles.error}>{errors.api}</div>}
 
-          <Button
-            title={isSubmitting ? "Uploading..." : "Upload Property"}
-            onPress={handleSubmit}
-            disabled={isSubmitting}
-          />
-        </View>
+          <button type="submit" style={styles.button} disabled={isSubmitting}>
+            {isSubmitting ? "Uploading..." : "Upload Property"}
+          </button>
+        </Form>
       )}
     </Formik>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { padding: 16 },
-  input: { borderWidth: 1, borderColor: "#ccc", padding: 8, marginBottom: 8 },
-  error: { color: "red", marginBottom: 4 },
-});
+const styles = {
+  container: { padding: "16px", display: "flex", flexDirection: "column" },
+  field: { marginBottom: "12px" },
+  input: {
+    border: "1px solid #ccc",
+    padding: "8px",
+    borderRadius: "4px",
+    width: "100%",
+    minHeight: "40px",
+  },
+  error: { color: "red", marginTop: "4px", fontSize: "14px" },
+  button: {
+    padding: "10px",
+    backgroundColor: "#007BFF",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+};
