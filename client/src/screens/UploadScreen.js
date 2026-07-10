@@ -1,21 +1,41 @@
 // src/screens/UploadScreen.js
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/Common/Header";
 import Footer from "../components/Common/Footer";
 import UploadForm from "../components/Property/UploadForm";
 
-export default function UploadScreen({ route }) {
-  const token = route.params?.token;
+export default function UploadScreen() {
+  // Access token passed via React Router state
+  const location = useLocation();
+  const token = location.state?.token;
+
+  const handleSuccess = (property) => {
+    console.log("Uploaded:", property);
+    // You could also navigate to the property detail page here:
+    // navigate(`/property/${property._id}`, { state: { property } });
+  };
 
   return (
-    <View style={styles.container}>
+    <div style={styles.container}>
       <Header title="📤 Upload Property" />
-      <UploadForm token={token} onSuccess={(property) => console.log("Uploaded:", property)} />
+      <main style={styles.content}>
+        <UploadForm token={token} onSuccess={handleSuccess} />
+      </main>
       <Footer />
-    </View>
+    </div>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-});
+const styles = {
+  container: {
+    minHeight: "100vh",
+    backgroundColor: "#fff",
+    display: "flex",
+    flexDirection: "column",
+  },
+  content: {
+    flex: 1,
+    padding: "16px",
+  },
+};
