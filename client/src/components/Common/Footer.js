@@ -1,23 +1,23 @@
-// src/components/common/Footer.js
+// src/components/Common/Footer.js
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
 
 export default function Footer() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>© {new Date().getFullYear()} Tolet Lagos</Text>
-    </View>
+    <footer style={styles.container}>
+      <p style={styles.text}>© {new Date().getFullYear()} Naija Homes</p>
+    </footer>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
-    padding: 12,
+    padding: "12px",
     backgroundColor: "#f1f1f1",
-    alignItems: "center",
+    textAlign: "center",
   },
   text: {
     color: "#555",
-    fontSize: 14,
+    fontSize: "14px",
+    margin: 0,
   },
-});
+};
