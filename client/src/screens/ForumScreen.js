@@ -1,6 +1,5 @@
 // src/screens/ForumScreen.js
 import React, { useState } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
 import Header from "../components/Common/Header";
 import Footer from "../components/Common/Footer";
 import Loader from "../components/Common/Loader";
