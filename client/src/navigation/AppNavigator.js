@@ -1,7 +1,5 @@
 // src/navigation/AppNavigator.js
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import TabNavigator from "./TabNavigator";
 import AuthLoadingScreen from "../screens/AuthLoadingScreen";
 import LoginScreen from "../screens/LoginScreen";
