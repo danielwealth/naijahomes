@@ -1,35 +1,58 @@
 // src/navigation/TabNavigator.js
 import React from "react";
+import { NavLink, Routes, Route } from "react-router-dom";
+
+// Screens
 import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
 import UploadScreen from "../screens/UploadScreen";
 import ForumScreen from "../screens/ForumScreen";
-import { Ionicons } from "@expo/vector-icons";
 
-const Tab = createBottomTabNavigator();
-
-export default function TabNavigator({ route }) {
-  const token = route.params?.token;
-
+export default function TabNavigator() {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          let iconName;
-          if (route.name === "Home") iconName = "home";
-          else if (route.name === "Search") iconName = "search";
-          else if (route.name === "Upload") iconName = "cloud-upload";
-          else if (route.name === "Forum") iconName = "chatbubbles";
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: "#007BFF",
-        tabBarInactiveTintColor: "gray",
-      })}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} initialParams={{ token }} />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Upload" component={UploadScreen} initialParams={{ token }} />
-      <Tab.Screen name="Forum" component={ForumScreen} initialParams={{ token }} />
-    </Tab.Navigator>
+    <div style={styles.container}>
+      {/* Tab bar */}
+      <nav style={styles.nav}>
+        <NavLink to="/" style={styles.link} end>
+          🏠 Home
+        </NavLink>
+        <NavLink to="/search" style={styles.link}>
+          🔍 Search
+        </NavLink>
+        <NavLink to="/upload" style={styles.link}>
+          ☁️ Upload
+        </NavLink>
+        <NavLink to="/forum" style={styles.link}>
+          💬 Forum
+        </NavLink>
+      </nav>
+
+      {/* Routes */}
+      <div style={styles.content}>
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/search" element={<SearchScreen />} />
+          <Route path="/upload" element={<UploadScreen />} />
+          <Route path="/forum" element={<ForumScreen />} />
+        </Routes>
+      </div>
+    </div>
   );
 }
+
+const styles = {
+  container: { display: "flex", flexDirection: "column", minHeight: "100vh" },
+  nav: {
+    display: "flex",
+    justifyContent: "space-around",
+    padding: "12px",
+    backgroundColor: "#f8f9fa",
+    borderBottom: "1px solid #ddd",
+  },
+  link: {
+    textDecoration: "none",
+    color: "#007BFF",
+    fontWeight: "bold",
+  },
+  content: { flex: 1, padding: "20px" },
+};
