@@ -14,7 +14,7 @@ export default function HomeScreen() {
 
   return (
     <div style={styles.container}>
-      <Header title="🏠 Tolet Lagos" />
+      <Header title=" Naija Homes" />
 
       {loading ? (
         <Loader />
