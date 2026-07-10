@@ -1,18 +1,12 @@
+// client/src/App.js
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Properties from "./pages/Properties";
-import Contact from "./pages/Contact";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/properties" element={<Properties />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </Router>
+    <div>
+      <h1>Welcome to Naijahomes</h1>
+      <p>Your property search starts here.</p>
+    </div>
   );
 }
 
