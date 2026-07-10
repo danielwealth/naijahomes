@@ -1,8 +1,8 @@
 // src/screens/UploadScreen.js
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import Header from "../components/common/Header";
-import Footer from "../components/common/Footer";
+import Header from "../components/Common/Header";
+import Footer from "../components/Common/Footer";
 import UploadForm from "../components/Property/UploadForm";
 
 export default function UploadScreen({ route }) {
