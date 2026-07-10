@@ -1,6 +1,5 @@
 // src/screens/SearchScreen.js
 import React, { useState } from "react";
-import { View, TextInput, Button, Text, StyleSheet, FlatList } from "react-native";
 import axios from "axios";
 import Header from "../components/Common/Header";
 import Footer from "../components/Common/Footer";
