@@ -1,7 +1,6 @@
 // src/screens/AuthLoadingScreen.js
 import React, { useEffect } from "react";
-import { View, ActivityIndicator, StyleSheet } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from "react";
 
 export default function AuthLoadingScreen({ navigation }) {
   useEffect(() => {
