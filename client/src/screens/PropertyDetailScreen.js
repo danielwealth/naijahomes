@@ -1,8 +1,8 @@
 // src/screens/PropertyDetailScreen.js
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import Header from "../components/common/Header";
-import Footer from "../components/common/Footer";
+import Header from "../components/Common/Header";
+import Footer from "../components/Common/Footer";
 
 export default function PropertyDetailScreen({ route }) {
   const { property } = route.params;
