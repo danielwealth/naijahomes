@@ -30,50 +30,62 @@ export default function SearchScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <div style={styles.container}>
       <Header title="🔍 Search Properties" />
 
-      <View style={styles.form}>
-        <TextInput
+      <div style={styles.form}>
+        <input
           style={styles.input}
           placeholder="Location (e.g. Lagos)"
           value={location}
-          onChangeText={setLocation}
+          onChange={(e) => setLocation(e.target.value)}
         />
-        <TextInput
+        <input
           style={styles.input}
           placeholder="Type (rent/buy)"
           value={type}
-          onChangeText={setType}
+          onChange={(e) => setType(e.target.value)}
         />
-        <Button title="Search" onPress={handleSearch} />
-      </View>
+        <button style={styles.button} onClick={handleSearch}>
+          Search
+        </button>
+      </div>
 
       {loading && <Loader />}
-      {error && <Text style={styles.error}>{error}</Text>}
+      {error && <p style={styles.error}>{error}</p>}
 
-      <FlatList
-        data={results}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item }) => <PropertyCard property={item} />}
-        ListEmptyComponent={<Text>No properties found</Text>}
-        contentContainerStyle={styles.list}
-      />
+      <div style={styles.list}>
+        {results.length === 0 && !loading ? (
+          <p>No properties found</p>
+        ) : (
+          results.map((item) => (
+            <PropertyCard key={item._id} property={item} />
+          ))
+        )}
+      </div>
 
       <Footer />
-    </View>
+    </div>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-  form: { padding: 16 },
+const styles = {
+  container: { minHeight: "100vh", backgroundColor: "#fff" },
+  form: { padding: "16px", display: "flex", flexDirection: "column" },
   input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 8,
-    marginBottom: 8,
+    border: "1px solid #ccc",
+    padding: "8px",
+    marginBottom: "8px",
+    borderRadius: "4px",
   },
-  error: { color: "red", margin: 8 },
-  list: { padding: 16 },
-});
+  button: {
+    padding: "10px",
+    backgroundColor: "#007BFF",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+  error: { color: "red", margin: "8px" },
+  list: { padding: "16px" },
+};
