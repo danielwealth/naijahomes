@@ -2,28 +2,28 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Import screens
-import AuthLoading from "./screens/AuthLoading";
-import Forum from "./screens/Forum";
-import Home from "./screens/Home";
-import Login from "./screens/Login";
-import PropertyDetail from "./screens/PropertyDetail";
-import Register from "./screens/Register";
-import Search from "./screens/Search";
-import Upload from "./screens/Upload";
+// Import screens with correct names
+import AuthLoadingScreen from "./screens/AuthLoadingScreen";
+import ForumScreen from "./screens/ForumScreen";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import PropertyDetailScreen from "./screens/PropertyDetailScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import SearchScreen from "./screens/SearchScreen";
+import UploadScreen from "./screens/UploadScreen";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<AuthLoading />} />
-        <Route path="/forum" element={<Forum />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/property/:id" element={<PropertyDetail />} />
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/auth" element={<AuthLoadingScreen />} />
+        <Route path="/forum" element={<ForumScreen />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/register" element={<RegisterScreen />} />
+        <Route path="/upload" element={<UploadScreen />} />
+        <Route path="/search" element={<SearchScreen />} />
+        <Route path="/property/:id" element={<PropertyDetailScreen />} />
       </Routes>
     </Router>
   );
