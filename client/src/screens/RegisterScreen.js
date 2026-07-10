@@ -1,6 +1,5 @@
 // src/screens/RegisterScreen.js
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import Header from "../components/Common/Header";
 import Footer from "../components/Common/Footer";
 import RegisterForm from "../components/Auth/RegisterForm";
