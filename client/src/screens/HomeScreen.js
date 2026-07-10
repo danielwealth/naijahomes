@@ -1,6 +1,6 @@
 // src/screens/HomeScreen.js
 import React, { useState } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Common/Header";
 import Footer from "../components/Common/Footer";
 import Loader from "../components/Common/Loader";
@@ -8,37 +8,47 @@ import Button from "../components/Common/Button";
 import PropertyList from "../components/Property/PropertyList";
 import ForumList from "../components/Forum/ForumList";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen() {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   return (
-    <View style={styles.container}>
+    <div style={styles.container}>
       <Header title="🏠 Tolet Lagos" />
 
       {loading ? (
         <Loader />
       ) : (
-        <ScrollView contentContainerStyle={styles.content}>
+        <main style={styles.content}>
           <PropertyList />
           <Button
             title="Upload Property"
-            onPress={() => navigation.navigate("UploadScreen")}
+            onClick={() => navigate("/upload")}
           />
 
           <ForumList />
           <Button
             title="New Forum Post"
-            onPress={() => navigation.navigate("ForumScreen")}
+            onClick={() => navigate("/forum")}
           />
-        </ScrollView>
+        </main>
       )}
 
       <Footer />
-    </View>
+    </div>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-  content: { padding: 16 },
-});
+const styles = {
+  container: {
+    minHeight: "100vh",
+    backgroundColor: "#fff",
+    display: "flex",
+    flexDirection: "column",
+  },
+  content: {
+    flex: 1,
+    padding: "16px",
+    overflowY: "auto",
+  },
+};
