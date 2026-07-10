@@ -2,7 +2,8 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Common/Loader";
-Import <Header title="Naijahomes" />
+import Header from "../components/Common/Header";
+
 
 export default function AuthLoadingScreen() {
   const navigate = useNavigate();
