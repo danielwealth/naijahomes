@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Common/Header";
 import Footer from "../components/Common/Footer";
 import LoginForm from "../components/Auth/LoginForm";
-Import <Header title="Naijahomes" />
 
 export default function LoginScreen() {
   const navigate = useNavigate();
