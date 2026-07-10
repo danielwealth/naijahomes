@@ -1,37 +1,31 @@
 // src/components/Forum/ForumPost.js
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 export default function ForumPost({ post }) {
-  const navigation = useNavigation();
-
   return (
-    <View style={styles.card}>
-      <Text style={styles.user}>{post.user?.name || "Anonymous"}</Text>
-      <Text style={styles.content}>{post.content}</Text>
-
+    <div style={styles.card}>
+      <p style={styles.user}>{post.user?.name || "Anonymous"}</p>
+      <p style={styles.content}>{post.content}</p>
       {post.property && (
-        <TouchableOpacity
-          onPress={() => navigation.navigate("PropertyDetail", { property: post.property })}
-        >
-          <Text style={styles.property}>
-            🔗 View Property: {post.property.title}
-          </Text>
-        </TouchableOpacity>
+        <p style={styles.property}>Property: {post.property.title}</p>
       )}
-
-      <Text style={styles.date}>
+      <p style={styles.date}>
         {new Date(post.createdAt).toLocaleDateString()}
-      </Text>
-    </View>
+      </p>
+    </div>
   );
 }
 
-const styles = StyleSheet.create({
-  card: { borderWidth: 1, borderColor: "#ddd", padding: 12, marginBottom: 12 },
-  user: { fontWeight: "bold", marginBottom: 4 },
-  content: { marginBottom: 6 },
-  property: { fontStyle: "italic", color: "#007BFF", marginTop: 6 },
-  date: { fontSize: 12, color: "#999", marginTop: 4 },
-});
+const styles = {
+  card: {
+    border: "1px solid #ddd",
+    padding: "12px",
+    marginBottom: "12px",
+    borderRadius: "6px",
+    backgroundColor: "#fff",
+  },
+  user: { fontWeight: "bold", marginBottom: "4px" },
+  content: { marginBottom: "6px" },
+  property: { fontStyle: "italic", color: "#555" },
+  date: { fontSize: "12px", color: "#999", marginTop: "4px" },
+};
