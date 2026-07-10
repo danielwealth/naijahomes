@@ -1,7 +1,6 @@
 // src/components/Auth/LoginForm.js
 import React from "react";
-import { View, TextInput, Button, Text, StyleSheet } from "react-native";
-import { Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
@@ -29,41 +28,55 @@ export default function LoginForm({ onSuccess }) {
         }
       }}
     >
-      {({ handleChange, handleSubmit, values, errors, isSubmitting }) => (
-        <View style={styles.container}>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            value={values.email}
-            onChangeText={handleChange("email")}
-            autoCapitalize="none"
-          />
-          {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+      {({ isSubmitting, errors }) => (
+        <Form style={styles.container}>
+          <div style={styles.field}>
+            <Field
+              type="email"
+              name="email"
+              placeholder="Email"
+              style={styles.input}
+            />
+            <ErrorMessage name="email" component="div" style={styles.error} />
+          </div>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            value={values.password}
-            onChangeText={handleChange("password")}
-            secureTextEntry
-          />
-          {errors.password && <Text style={styles.error}>{errors.password}</Text>}
+          <div style={styles.field}>
+            <Field
+              type="password"
+              name="password"
+              placeholder="Password"
+              style={styles.input}
+            />
+            <ErrorMessage name="password" component="div" style={styles.error} />
+          </div>
 
-          {errors.api && <Text style={styles.error}>{errors.api}</Text>}
+          {errors.api && <div style={styles.error}>{errors.api}</div>}
 
-          <Button
-            title={isSubmitting ? "Logging in..." : "Login"}
-            onPress={handleSubmit}
-            disabled={isSubmitting}
-          />
-        </View>
+          <button type="submit" style={styles.button} disabled={isSubmitting}>
+            {isSubmitting ? "Logging in..." : "Login"}
+          </button>
+        </Form>
       )}
     </Formik>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { padding: 16 },
-  input: { borderWidth: 1, borderColor: "#ccc", padding: 8, marginBottom: 8 },
-  error: { color: "red", marginBottom: 4 },
-});
+const styles = {
+  container: { padding: "16px", display: "flex", flexDirection: "column" },
+  field: { marginBottom: "12px" },
+  input: {
+    border: "1px solid #ccc",
+    padding: "8px",
+    borderRadius: "4px",
+    width: "100%",
+  },
+  error: { color: "red", marginTop: "4px", fontSize: "14px" },
+  button: {
+    padding: "10px",
+    backgroundColor: "#007BFF",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+};
