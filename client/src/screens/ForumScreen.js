@@ -1,17 +1,19 @@
 // src/screens/ForumScreen.js
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/Common/Header";
 import Footer from "../components/Common/Footer";
 import Loader from "../components/Common/Loader";
 import ForumList from "../components/Forum/ForumList";
 import NewPostForm from "../components/Forum/NewPostForm";
 
-export default function ForumScreen({ route }) {
+export default function ForumScreen() {
   const [loading, setLoading] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
 
-  // token passed from navigation or global state
-  const token = route.params?.token;
+  // Access token passed via React Router state
+  const location = useLocation();
+  const token = location.state?.token;
 
   const handleNewPost = () => {
     // Refresh ForumList after new post
@@ -19,24 +21,24 @@ export default function ForumScreen({ route }) {
   };
 
   return (
-    <View style={styles.container}>
+    <div style={styles.container}>
       <Header title="💬 Property Forum" />
 
       {loading ? (
         <Loader />
       ) : (
-        <ScrollView contentContainerStyle={styles.content}>
+        <main style={styles.content}>
           <NewPostForm token={token} onSuccess={handleNewPost} />
           <ForumList key={refreshKey} />
-        </ScrollView>
+        </main>
       )}
 
       <Footer />
-    </View>
+    </div>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-  content: { padding: 16 },
-});
+const styles = {
+  container: { minHeight: "100vh", backgroundColor: "#fff" },
+  content: { padding: "16px" },
+};
