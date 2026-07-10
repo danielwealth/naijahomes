@@ -1,26 +1,38 @@
 // src/screens/LoginScreen.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Common/Header";
 import Footer from "../components/Common/Footer";
 import LoginForm from "../components/Auth/LoginForm";
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen() {
+  const navigate = useNavigate();
+
   const handleLoginSuccess = (data) => {
-    // Save token securely (AsyncStorage or Context)
     const { token, user } = data;
-    // Navigate to AppNavigator with token
-    navigation.replace("AppNavigator", { token, user });
+
+    // Save token and user securely in localStorage
+    localStorage.setItem("authToken", token);
+    localStorage.setItem("user", JSON.stringify(user));
+
+    // Navigate to home (or dashboard) after login
+    navigate("/", { replace: true });
   };
 
   return (
-    <View style={styles.container}>
+    <div style={styles.container}>
       <Header title="🔑 Login" />
       <LoginForm onSuccess={handleLoginSuccess} />
       <Footer />
-    </View>
+    </div>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-});
+const styles = {
+  container: {
+    minHeight: "100vh",
+    backgroundColor: "#fff",
+    display: "flex",
+    flexDirection: "column",
+  },
+};
