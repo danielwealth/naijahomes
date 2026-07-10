@@ -6,7 +6,6 @@ import Footer from "../components/Common/Footer";
 import Loader from "../components/Common/Loader";
 import ForumList from "../components/Forum/ForumList";
 import NewPostForm from "../components/Forum/NewPostForm";
-Import <Header title="Naijahomes" />
 
 export default function ForumScreen() {
   const [loading, setLoading] = useState(false);
