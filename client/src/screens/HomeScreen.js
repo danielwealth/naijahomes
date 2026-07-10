@@ -1,33 +1,44 @@
-// src/components/common/Button.js
-import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+// src/screens/HomeScreen.js
+import React, { useState } from "react";
+import { View, ScrollView, StyleSheet } from "react-native";
+import Header from "../components/Common/Header";
+import Footer from "../components/Common/Footer";
+import Loader from "../components/Common/Loader";
+import Button from "../components/Common/Button";
+import PropertyList from "../components/Property/PropertyList";
+import ForumList from "../components/Forum/ForumList";
 
-export default function Button({ title, onPress, disabled }) {
+export default function HomeScreen({ navigation }) {
+  const [loading, setLoading] = useState(false);
+
   return (
-    <TouchableOpacity
-      style={[styles.button, disabled && styles.disabled]}
-      onPress={onPress}
-      disabled={disabled}
-    >
-      <Text style={styles.text}>{title}</Text>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <Header title="🏠 Tolet Lagos" />
+
+      {loading ? (
+        <Loader />
+      ) : (
+        <ScrollView contentContainerStyle={styles.content}>
+          <PropertyList />
+          <Button
+            title="Upload Property"
+            onPress={() => navigation.navigate("UploadScreen")}
+          />
+
+          <ForumList />
+          <Button
+            title="New Forum Post"
+            onPress={() => navigation.navigate("ForumScreen")}
+          />
+        </ScrollView>
+      )}
+
+      <Footer />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#007BFF",
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 6,
-    alignItems: "center",
-  },
-  disabled: {
-    backgroundColor: "#aaa",
-  },
-  text: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
+  container: { flex: 1, backgroundColor: "#fff" },
+  content: { padding: 16 },
 });
