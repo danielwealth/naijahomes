@@ -1,41 +1,51 @@
 // src/components/Property/PropertyCard.js
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigate } from "react-router-dom";
 
 export default function PropertyCard({ property }) {
-  const navigation = useNavigation();
+  const navigate = useNavigate();
 
   return (
-    <TouchableOpacity
+    <div
       style={styles.card}
-      onPress={() => navigation.navigate("PropertyDetail", { property })}
+      onClick={() => navigate("/property/" + property._id, { state: { property } })}
     >
       {property.images?.[0] && (
-        <Image source={{ uri: property.images[0] }} style={styles.image} />
+        <img
+          src={property.images[0]}
+          alt={property.title}
+          style={styles.image}
+        />
       )}
-      <Text style={styles.title}>{property.title}</Text>
-      <Text style={styles.location}>{property.location}</Text>
-      <Text style={styles.phone}>📞 {property.phone}</Text>
-      <Text style={styles.type}>
+      <h2 style={styles.title}>{property.title}</h2>
+      <p style={styles.location}>{property.location}</p>
+      <p style={styles.phone}>📞 {property.phone}</p>
+      <p style={styles.type}>
         {property.type === "rent" ? "For Rent" : "For Sale"}
-      </Text>
-    </TouchableOpacity>
+      </p>
+    </div>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = {
   card: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    padding: 12,
-    marginBottom: 12,
-    borderRadius: 8,
+    border: "1px solid #ddd",
+    padding: "12px",
+    marginBottom: "12px",
+    borderRadius: "8px",
     backgroundColor: "#fff",
+    cursor: "pointer",
+    transition: "box-shadow 0.2s ease",
   },
-  image: { width: "100%", height: 200, marginBottom: 8, borderRadius: 6 },
-  title: { fontSize: 18, fontWeight: "bold" },
-  location: { color: "#555" },
-  phone: { marginTop: 4 },
-  type: { marginTop: 8, fontWeight: "600", color: "#007BFF" },
-});
+  image: {
+    width: "100%",
+    height: "200px",
+    objectFit: "cover",
+    marginBottom: "8px",
+    borderRadius: "6px",
+  },
+  title: { fontSize: "18px", fontWeight: "bold", margin: "4px 0" },
+  location: { color: "#555", margin: "2px 0" },
+  phone: { marginTop: "4px" },
+  type: { marginTop: "8px", fontWeight: "600", color: "#007BFF" },
+};
