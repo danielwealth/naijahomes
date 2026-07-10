@@ -1,6 +1,5 @@
 // src/screens/LoginScreen.js
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import Header from "../components/Common/Header";
 import Footer from "../components/Common/Footer";
 import LoginForm from "../components/Auth/LoginForm";
