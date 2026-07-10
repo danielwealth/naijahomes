@@ -8,10 +8,10 @@
 
 [context.production.environment]
   NODE_ENV = "production"
-  REACT_APP_API_URL = "https://tolet.onrender.com" # Your Render backend URL
+  REACT_APP_API_URL = "https://naijahomes.onrender.com" # Your Render backend URL
 
 [[redirects]]
   from = "/api/*"
-  to = "https://tolet.onrender.com/:splat"
+  to = "https://naijahomes.onrender.com/:splat"
   status = 200
   force = true
