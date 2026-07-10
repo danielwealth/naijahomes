@@ -7,7 +7,6 @@ import Loader from "../components/Common/Loader";
 import Button from "../components/Common/Button";
 import PropertyList from "../components/Property/PropertyList";
 import ForumList from "../components/Forum/ForumList";
-Import <Header title="Naijahomes" />
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false);
