@@ -1,28 +1,40 @@
 // src/screens/AuthLoadingScreen.js
 import React, { useEffect } from "react";
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import Loader from "../components/Common/Loader";
 
-export default function AuthLoadingScreen({ navigation }) {
+export default function AuthLoadingScreen() {
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const bootstrapAsync = async () => {
-      const token = await AsyncStorage.getItem("authToken");
-      const user = await AsyncStorage.getItem("user");
+    const bootstrapAsync = () => {
+      const token = localStorage.getItem("authToken");
+      const user = localStorage.getItem("user");
+
       if (token && user) {
-        navigation.replace("AppNavigator", { token, user: JSON.parse(user) });
+        // Navigate to main app with token and user
+        navigate("/", { replace: true });
       } else {
-        navigation.replace("Login");
+        // Navigate to login
+        navigate("/login", { replace: true });
       }
     };
+
     bootstrapAsync();
-  }, []);
+  }, [navigate]);
 
   return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" color="#007BFF" />
-    </View>
+    <div style={styles.container}>
+      <Loader />
+    </div>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-});
+const styles = {
+  container: {
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+};
