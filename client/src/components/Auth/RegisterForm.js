@@ -17,14 +17,20 @@ export default function RegisterForm({ onSuccess }) {
       initialValues={{ name: "", email: "", password: "", phone: "" }}
       validationSchema={RegisterSchema}
       onSubmit={async (values, { setSubmitting, setErrors }) => {
+        console.log("Submitting values:", values);
+        console.log("API URL:", `${process.env.REACT_APP_API_URL}/api/auth/register`);
+
         try {
           const res = await axios.post(
             `${process.env.REACT_APP_API_URL}/api/auth/register`,
-            values
+            values,
+            { headers: { "Content-Type": "application/json" } }
           );
+          console.log("Response data:", res.data);
           onSuccess(res.data); // Pass token/user data up
         } catch (err) {
-          setErrors({ api: "Registration failed. Please try again." });
+          console.error("Registration error:", err.response?.data || err.message);
+          setErrors({ api: err.response?.data?.message || "Registration failed. Please try again." });
         } finally {
           setSubmitting(false);
         }
@@ -33,42 +39,22 @@ export default function RegisterForm({ onSuccess }) {
       {({ isSubmitting, errors }) => (
         <Form style={styles.container}>
           <div style={styles.field}>
-            <Field
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              style={styles.input}
-            />
+            <Field type="text" name="name" placeholder="Full Name" style={styles.input} />
             <ErrorMessage name="name" component="div" style={styles.error} />
           </div>
 
           <div style={styles.field}>
-            <Field
-              type="email"
-              name="email"
-              placeholder="Email"
-              style={styles.input}
-            />
+            <Field type="email" name="email" placeholder="Email" style={styles.input} />
             <ErrorMessage name="email" component="div" style={styles.error} />
           </div>
 
           <div style={styles.field}>
-            <Field
-              type="password"
-              name="password"
-              placeholder="Password"
-              style={styles.input}
-            />
+            <Field type="password" name="password" placeholder="Password" style={styles.input} />
             <ErrorMessage name="password" component="div" style={styles.error} />
           </div>
 
           <div style={styles.field}>
-            <Field
-              type="text"
-              name="phone"
-              placeholder="Phone Number"
-              style={styles.input}
-            />
+            <Field type="text" name="phone" placeholder="Phone Number" style={styles.input} />
             <ErrorMessage name="phone" component="div" style={styles.error} />
           </div>
 
